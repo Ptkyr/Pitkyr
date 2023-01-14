@@ -2,7 +2,7 @@ node_modules/
 .idea/
 build/
 *.db
-config.js
+config.json
 src/declarations/
 .vs/
 .vscode/
