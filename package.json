@@ -1,0 +1,22 @@
+{
+  "name": "pitkyr",
+  "version": "1.0.0",
+  "description": "a memorization tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ptkyr/Pitkyr.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ptkyr/Pitkyr/issues"
+  },
+  "homepage": "https://github.com/Ptkyr/Pitkyr#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  }
+}
