@@ -1,31 +1,22 @@
 const { SlashCommandBuilder, messageLink } = require('discord.js');
+const { BYTE_LEN, getByte, randomLearned } = require('../util.js');
 
-require('dotenv').config();
-
-const DIGITS = 770;
-const BYTE_LEN = 8;
-
-function getByte(index) {
-    return process.env.PI.substring(index, index + BYTE_LEN);
-  }
+const WAIT_TIME = 20;
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('pi')
-		.setDescription('Returns a prompt byte and waits for the next byte.'),
+		.setDescription('Returns a prompt byte and waits ' + WAIT_TIME + 's for the next byte.'),
 	async execute(interaction) {
-		// interaction.user is the object representing the User who ran the command
-		// interaction.member is the GuildMember object, which represents the user in the specific guild
-        const index = Math.floor(Math.random() * (DIGITS - 2 * BYTE_LEN));
+		// Retrieve random byte from learnt digits
+        const index = randomLearned()
         const clue = getByte(index);
         const check = getByte(index + BYTE_LEN);
-        console.log(clue);
-        console.log(check);
 		await interaction.reply(clue);
 
         // Wait for a single response from the slash command user
         const filter = m => m.author.id == interaction.user.id;
-        const collector = interaction.channel.createMessageCollector({ filter, time: 20000, max: 1 });
+        const collector = interaction.channel.createMessageCollector({ filter, time: WAIT_TIME * 1000, max: 1 });
 
         let status = 0;
 
