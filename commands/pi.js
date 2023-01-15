@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, messageLink } = require('discord.js');
 
 const DIGITS = 770;
 const BYTE_LEN = 8;
@@ -21,5 +21,31 @@ module.exports = {
         console.log(clue);
         console.log(check);
 		await interaction.reply(clue);
+
+        // Wait for a single response from the slash command user
+        const filter = m => m.author.id == interaction.user.id;
+        const collector = interaction.channel.createMessageCollector({ filter, time: 20000, max: 1 });
+
+        let status = 0;
+
+        collector.on('collect', m => {
+            console.log(`Collected ${m.content}`);
+            if (m.content != check) {
+                status = 1;
+            }
+        });
+
+        collector.on('end', collected => {
+            console.log(`Collected ${collected.size} items`);
+            if (collected.size > 0) {
+                if (status == 1) {
+                    interaction.followUp('Incorrect. Answer: ' + check);
+                } else {
+                    interaction.followUp('Correct! Attempt over.');
+                }
+            } else {
+                interaction.followUp('Timed out! Answer: ' + check);
+            }
+        });
 	},
 };
