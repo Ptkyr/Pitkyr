@@ -1,10 +1,10 @@
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
-const { BYTE_LEN, LEARNED, getSequence, getIndex } = require('../util.js');
+const { BYTE_LEN, getSequence, getIndex } = require('../util.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('lookup')
-		.setDescription('Returns the word following the given byte.')
+		.setDescription('Returns the word following the given byte')
         .addStringOption(option =>
             option
             .setName('input')

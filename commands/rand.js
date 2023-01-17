@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, messageLink } = require('discord.js');
+const { SlashCommandBuilder } = require('discord.js');
 const { BYTE_LEN, getByte, randomLearned } = require('../util.js');
 
 const WAIT_TIME = 20;
@@ -8,7 +8,7 @@ const RIGHT_ANSWER = 0;
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('rand')
-		.setDescription('Prompts with a random, learnt byte and waits ' + WAIT_TIME + 's for the next byte.'),
+		.setDescription('Prompts with a random, learnt byte and waits ' + WAIT_TIME + 's for the next byte'),
 	async execute(interaction) {
 		// Retrieve random byte from learnt digits
         const index = randomLearned();
