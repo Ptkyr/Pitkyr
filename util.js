@@ -15,6 +15,9 @@ module.exports = {
         const j = parseInt(jump);
         return process.env.PI.substring(i, index + j);
     },
+    getIndex: function(byte) {
+        return process.env.PI.indexOf(byte);
+    },
     randomLearned: function() {
         return Math.floor(Math.random() * (LEARNED- 2 * BYTE_LEN));
     }
