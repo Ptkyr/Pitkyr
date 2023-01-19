@@ -8,7 +8,7 @@ module.exports = {
         .addStringOption(option =>
             option
             .setName('input')
-            .setDescription('The byte preceding the fetched word.')
+            .setDescription('The byte preceding the fetched word')
             .setRequired(true)),
 	async execute(interaction) {
         const input = interaction.options.getString('input');
