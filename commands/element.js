@@ -14,10 +14,10 @@ module.exports = {
             .setRequired(true)),
 	async execute(interaction) {
         const input = interaction.options.getString('input');
-        let request;
         let json;
+
         for (const parser of parseOptions) {
-            request = await fetch(PT_API + parser + '?' + parser + '=' + input);
+            const request = await fetch(PT_API + parser + '?' + parser + '=' + input);
             if (!request.ok) {
                 interaction.reply("API call failed: " + requestJSON.status);
                 return;
@@ -28,21 +28,27 @@ module.exports = {
                 break;
             }
         }
+
         if (json === undefined) {
             interaction.reply("All parse options failed");
             return;
         }
+
         const element = new EmbedBuilder()
+            .setColor(0xfccf03)
+            .setTitle(json['name'])
+            .setDescription(json['electronicConfiguration'])
             .addFields(
-                { name: 'Name:',  value: json['name'] },
-                { name: 'Symbol', value: json['symbol'] },
-                { name: 'Z:',     value: json['atomicNumber'].toString() },
-                { name: 'M:',     value: json['atomicMass'].toString() },
-                { name: 'EN:',    value: json['electronegativity'].toString() },
-                { name: 'GSEC:',  value: json['electronicConfiguration'] },
-                { name: 'EA:',    value: json['electronAffinity'].toString() },
-                { name: 'IE:',    value: json['ionizationEnergy'].toString() }
+                { name: 'Symbol:', value: json['symbol'],                       inline: true },
+                { name: 'Z:',      value: json['atomicNumber'].toString(),      inline: true },
+                { name: 'M:',      value: json['atomicMass'].toString(),        inline: true }
+            )
+            .addFields(
+                { name: 'EN:',     value: json['electronegativity'].toString(), inline: true },
+                { name: 'EA:',     value: json['electronAffinity'].toString(),  inline: true },
+                { name: 'IE:',     value: json['ionizationEnergy'].toString(),  inline: true }
             );
+
 		await interaction.reply({ embeds: [element] });
 	},
 };

@@ -8,6 +8,7 @@ module.exports = {
 	async execute(interaction) {
 		const nextWord = getSequence(LEARNED, 4 * BYTE_LEN);
 		const word = new EmbedBuilder();
+
 		for (let i = 0; i < 4; ++i) {
 			word.addFields(
 				{ 
@@ -16,6 +17,7 @@ module.exports = {
 				}
 			);
 		}
+		
 		await interaction.reply({ embeds: [word] });
 	},
 };

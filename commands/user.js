@@ -13,8 +13,9 @@ module.exports = {
 			.addFields(
 				// Convert these to strings by adding nothing because JavaScript
 				{ name: 'Account created:', value: '' + interaction.member.user.createdAt },
-				{ name: 'Joined on:', value: '' + interaction.member.joinedAt }
+				{ name: 'Joined on:',       value: '' + interaction.member.joinedAt }
 			);
+
 		await interaction.reply({ embeds: [userInfo]} );
 	},
 };
